@@ -111,4 +111,11 @@ typedef void (^FTLocationManagerCompletionHandler)(CLLocation *location, NSError
  */
 - (CLLocationDistance)distanceFromLocation:(CLLocation *)location;
 
+/**
+ * Returns formatted string of the distance. In meters or kilometers.
+ *
+ * @param distance Distance in meters
+ */
+- (NSString *)formatDistance:(CLLocationDistance)distance;
+
 @end

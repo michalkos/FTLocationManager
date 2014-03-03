@@ -141,6 +141,33 @@ NSString *const FTLocationManagerErrorDomain = @"FTLocationManagerErrorDomain";
     return distance;
 }
 
+- (NSString *)formatDistance:(CLLocationDistance)distance
+{
+    static NSNumberFormatter *formatter = nil;
+    if (!formatter) {
+        formatter = [NSNumberFormatter new];
+        [formatter setLocale:[NSLocale currentLocale]];
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        [formatter setMaximumSignificantDigits:2];
+        [formatter setUsesSignificantDigits:YES];
+    }
+    
+    NSString *distanceString, *unitString;
+    double meterDistance = distance;
+    double kilometerDistance = distance * 0.001;
+    
+    if (kilometerDistance >= 1) {
+        distanceString = [formatter stringFromNumber:@(kilometerDistance)];
+        unitString = @"km";
+        
+    } else {
+        distanceString = [formatter stringFromNumber:@(meterDistance)];
+        unitString = @"m";
+    }
+    
+    return [NSString stringWithFormat:@"%@%@", distanceString, unitString];
+}
+
 #pragma mark - Location manager delegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
