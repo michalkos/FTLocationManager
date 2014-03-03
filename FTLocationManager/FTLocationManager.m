@@ -131,6 +131,20 @@ NSString *const FTLocationManagerErrorDomain = @"FTLocationManagerErrorDomain";
     [self.locationManager startUpdatingLocation];
 }
 
+- (void)cancelLocationUpdate
+{
+    [self.locationManager stopUpdatingLocation];
+    
+    //  Cancel previous error timeouts
+    [self stopErrorTimeout];
+    
+    //  Clear completion block
+    self.completionBlock = nil;
+    
+    //  Reset errors count
+    _errorsCount = 0;
+}
+
 - (CLLocationDistance)distanceFromLocation:(CLLocation *)location
 {
     CLLocationDistance distance = -1;
