@@ -31,8 +31,7 @@
 
 
 #import <Foundation/Foundation.h>
-
-@class CLLocation;
+#import <CoreLocation/CoreLocation.h>
 
 /**
  *  Error domain used for error created directly by FTLocationManager
@@ -77,6 +76,16 @@ typedef void (^FTLocationManagerCompletionHandler)(CLLocation *location, NSError
  *  Default: 3s
  */
 @property (nonatomic, assign) NSTimeInterval errorTimeout;
+
+/**
+ * Represents the accuracy of a coordinate value in meters.
+ */
+@property (nonatomic, assign) CLLocationAccuracy desiredAccuracy;
+
+/**
+ * A distance measurement (in meters) from an existing location.
+ */
+@property (nonatomic, assign) CLLocationDistance distanceFilter;
 
 /**
  *  @return Shared singleton instance

@@ -32,8 +32,6 @@
 
 #import "FTLocationManager.h"
 
-#import <CoreLocation/CoreLocation.h>
-
 NSString *const FTLocationManagerErrorDomain = @"FTLocationManagerErrorDomain";
 
 //  Private interface encapsulating functionality
@@ -106,6 +104,14 @@ NSString *const FTLocationManagerErrorDomain = @"FTLocationManagerErrorDomain";
     {
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
+        
+        if (_desiredAccuracy > 0.0) {
+            _locationManager.desiredAccuracy = _desiredAccuracy;
+        }
+        
+        if (_distanceFilter > 0.0) {
+            _locationManager.distanceFilter = _distanceFilter;
+        }
     }
     
     return _locationManager;
