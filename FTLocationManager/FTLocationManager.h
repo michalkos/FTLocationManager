@@ -104,4 +104,11 @@ typedef void (^FTLocationManagerCompletionHandler)(CLLocation *location, NSError
  */
 - (void)updateLocationWithCompletionHandler:(FTLocationManagerCompletionHandler)completion;
 
+/**
+ * Returns the lateral distance between current location and parameter.
+ * 
+ * @param location The other location.
+ */
+- (CLLocationDistance)distanceFromLocation:(CLLocation *)location;
+
 @end

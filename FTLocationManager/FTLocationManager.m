@@ -131,6 +131,16 @@ NSString *const FTLocationManagerErrorDomain = @"FTLocationManagerErrorDomain";
     [self.locationManager startUpdatingLocation];
 }
 
+- (CLLocationDistance)distanceFromLocation:(CLLocation *)location
+{
+    CLLocationDistance distance = -1;
+    if (self.location && CLLocationCoordinate2DIsValid(self.location.coordinate)) {
+        distance = [self.location distanceFromLocation:location];
+    }
+    
+    return distance;
+}
+
 #pragma mark - Location manager delegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
