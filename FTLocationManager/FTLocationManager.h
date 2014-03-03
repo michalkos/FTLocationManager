@@ -58,6 +58,8 @@ typedef void (^FTLocationManagerCompletionHandler)(CLLocation *location, NSError
 
 @interface FTLocationManager : NSObject
 
+#pragma mark Properties
+
 /**
  *  Location received from Location services
  */
@@ -86,6 +88,8 @@ typedef void (^FTLocationManagerCompletionHandler)(CLLocation *location, NSError
  * A distance measurement (in meters) from an existing location.
  */
 @property (nonatomic, assign) CLLocationDistance distanceFilter;
+
+#pragma mark - Methods
 
 /**
  *  @return Shared singleton instance
