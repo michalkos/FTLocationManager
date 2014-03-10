@@ -33,6 +33,8 @@
 #import "FTLocationManager.h"
 
 NSString *const FTLocationManagerErrorDomain = @"FTLocationManagerErrorDomain";
+NSString *const FTLocationManagerNotificationChanged = @"FTLocationManagerNotificationChanged";
+NSString *const FTLocationManagerNotificationFailed = @"FTLocationManagerNotificationFailed";
 
 //  Private interface encapsulating functionality
 @interface FTLocationManager () <CLLocationManagerDelegate>
@@ -202,6 +204,8 @@ NSString *const FTLocationManagerErrorDomain = @"FTLocationManagerErrorDomain";
         _completionBlock(_location, nil, NO);
         self.completionBlock = nil;
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:FTLocationManagerNotificationChanged object:nil];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -215,6 +219,7 @@ NSString *const FTLocationManagerErrorDomain = @"FTLocationManagerErrorDomain";
     {
         _errorsCount = 0;
         [self locationUpdatingFailedWithError:error locationServicesDisabled:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:FTLocationManagerNotificationFailed object:nil userInfo:@{ @"error" : error }];
         return;
     }
     
@@ -227,6 +232,7 @@ NSString *const FTLocationManagerErrorDomain = @"FTLocationManagerErrorDomain";
     if(_errorsCount >= _maxErrorsCount)
     {
         [self locationUpdatingFailedWithError:error locationServicesDisabled:NO];
+        [[NSNotificationCenter defaultCenter] postNotificationName:FTLocationManagerNotificationFailed object:nil userInfo:@{ @"error" : error }];
     }
 }
 

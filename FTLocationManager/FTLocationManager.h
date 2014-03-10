@@ -39,6 +39,16 @@
 extern NSString *const FTLocationManagerErrorDomain;
 
 /**
+ *  Notification name for changed location
+ */
+extern NSString *const FTLocationManagerNotificationChanged;
+
+/**
+ *  Notification name for failed location manager
+ */
+extern NSString *const FTLocationManagerNotificationFailed;
+
+/**
  *  FTLocationManagerErrorDomain custom error codes
  */
 typedef NS_ENUM(NSInteger, FTLocationManagerErrorCode) {
